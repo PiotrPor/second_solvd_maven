@@ -13,10 +13,11 @@ import java.util.HashMap;
 
 public class MainClass {
     public static void main(String[] args) {
-        List<String> linesFromFile = new ArrayList<>();
+        List<String> linesFromFile;
         List<String> separateWords = new ArrayList<>();
         Map<String,Integer> wordQuantities = new HashMap<>();
 
+        String titleOfTextFile = "about_Titanium.txt";
         try {
             linesFromFile = FileUtils.readLines(FileUtils.getFile("about_Titanium.txt"), StandardCharsets.UTF_8);
         } catch (IOException e) {
@@ -32,7 +33,6 @@ public class MainClass {
             }
         }
 
-        // www.geeksforgeeks.org/java-program-to-print-all-unique-words-of-a-string/
         for(String word : separateWords) {
             if(wordQuantities.containsKey(word)) {
                 wordQuantities.put(word, wordQuantities.get(word)+1);
@@ -48,8 +48,14 @@ public class MainClass {
             }
         }
 
-        //this information should be written to file
-        System.out.println("Number of unique words in the file is "+ Integer.toString(amountOfUnique));
-
+        String descriptionOfResult = "In \""+ titleOfTextFile +"\" there were ";
+        descriptionOfResult += Integer.toString(amountOfUnique) +" unique words.";
+        File fileWithResult = new File("results.txt");
+        try {
+            FileUtils.touch(fileWithResult);
+            FileUtils.write(fileWithResult, descriptionOfResult, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException("IO exception: "+ e.getMessage());
+        }
     }
 }
