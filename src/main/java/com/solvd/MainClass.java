@@ -17,7 +17,7 @@ public class MainClass {
         List<String> separateWords = new ArrayList<>();
         Map<String,Integer> wordQuantities = new HashMap<>();
 
-        String titleOfTextFile = "about_Titanium.txt";
+        String titleOfTextFile = "about_Titanium.txt"; //will later be needed
         try {
             linesFromFile = FileUtils.readLines(FileUtils.getFile("about_Titanium.txt"), StandardCharsets.UTF_8);
         } catch (IOException e) {
@@ -49,11 +49,13 @@ public class MainClass {
         }
 
         String descriptionOfResult = "In \""+ titleOfTextFile +"\" there were ";
-        descriptionOfResult += Integer.toString(amountOfUnique) +" unique words.";
+        descriptionOfResult += amountOfUnique +" unique words.";
         File fileWithResult = new File("results.txt");
         try {
-            FileUtils.touch(fileWithResult);
-            FileUtils.write(fileWithResult, descriptionOfResult, StandardCharsets.UTF_8);
+            //FileUtils.touch(fileWithResult);
+            //before writing to file, creates a file if it doesn't exist
+            FileUtils.writeStringToFile(fileWithResult, descriptionOfResult, StandardCharsets.UTF_8, true);
+            //FileUtils.write(fileWithResult, descriptionOfResult, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException("IO exception: "+ e.getMessage());
         }
