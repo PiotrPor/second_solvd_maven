@@ -17,9 +17,10 @@ public class MainClass {
         List<String> separateWords = new ArrayList<>();
         Map<String,Integer> wordQuantities = new HashMap<>();
 
-        String titleOfTextFile = "about_Titanium.txt"; //will later be needed
+        String titleOfTextFile = "about_Titanium.txt"; //will be needed later
         try {
-            linesFromFile = FileUtils.readLines(FileUtils.getFile("src/main/resources/about_Titanium.txt"), StandardCharsets.UTF_8);
+            String filepath = "src/main/resources/" + titleOfTextFile;
+            linesFromFile = FileUtils.readLines(FileUtils.getFile(filepath), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -49,7 +50,7 @@ public class MainClass {
         }
 
         String descriptionOfResult = "In \""+ titleOfTextFile +"\" there were ";
-        descriptionOfResult += amountOfUnique +" unique words.";
+        descriptionOfResult += amountOfUnique +" unique words.\n";
         File fileWithResult = new File("results.txt");
         try {
             //FileUtils.touch(fileWithResult);
