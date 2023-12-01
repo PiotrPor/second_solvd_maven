@@ -19,7 +19,7 @@ public class MainClass {
 
         String titleOfTextFile = "about_Titanium.txt"; //will later be needed
         try {
-            linesFromFile = FileUtils.readLines(FileUtils.getFile("about_Titanium.txt"), StandardCharsets.UTF_8);
+            linesFromFile = FileUtils.readLines(FileUtils.getFile("src/main/resources/about_Titanium.txt"), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
